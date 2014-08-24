@@ -382,4 +382,3 @@ ISR (TCC0_OVF_vect, ISR_NAKED)
     vTaskIncrementTick();
 }
 #endif
-

@@ -1,12 +1,7 @@
--------------IMPORTANT---------------
-Do not modify files tasks.c queue.c list.c and others.
-The only files that could be modified are: FreeRTOSconfig.h and files in folder RTOS/portable
-For ANY XMEGA this  port in current state should work. The only difference between ports
-for different xmegas is size of program counter. 16-bit for devices with 128K of program memory
-or less. 24-bit for other xmegas. This only matters in pxPortInitialiseStack();.
-You will receive error from compiler if amount of memory for your devices is not defined
-(you will have to do it yourself).
+I forked yuriykulikov's FreeRTOS port and added the FreeRTOS 7.0.2 kernel. It was tested on ATXmega128a4u. The source is in form of AtmelStudio project (AtmelStudio 6.2). It utilizes few ASF drivers: "Delay routines", "Generic board support", "IOPORT". Some drivers are supported manually in "MyDrivers" directory.
 
-Do not do any other modifications if you are not absolutely sure.
+The demo runs 2 tasks, each blinking one LED with different rate.
 
-in RTOS/portable/memMang exclude files heap_2.c and heap_3.c from build.
+------------------------
+FreeRTOS port files (port.c, portmacro.h) forked from https://github.com/yuriykulikov/FreeRTOS-on-XMEGA
+
