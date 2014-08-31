@@ -39,7 +39,8 @@ main.d main.o: .././main.c \
  ../src/ASF/common/utils/interrupt/interrupt_avr8.h \
  ../src/ASF/common/services/ioport/xmega/ioport.h \
  ../src/ASF/common/services/ioport/xmega/ioport_compat.h \
- ../src/ASF/common/services/ioport/xmega/../ioport.h
+ ../src/ASF/common/services/ioport/xmega/../ioport.h \
+ ../MyDrivers/usart_driver_RTOS.h ../MyDrivers/avr_compiler.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -132,3 +133,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-g
 ../src/ASF/common/services/ioport/xmega/ioport_compat.h:
 
 ../src/ASF/common/services/ioport/xmega/../ioport.h:
+
+../MyDrivers/usart_driver_RTOS.h:
+
+../MyDrivers/avr_compiler.h:

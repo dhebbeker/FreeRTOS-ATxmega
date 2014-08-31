@@ -43,7 +43,7 @@
 #define configUSE_IDLE_HOOK         0 //1
 #define configUSE_TICK_HOOK         0 //0
 
-#define configCPU_CLOCK_HZ          ( ( unsigned long ) F_CPU )//2MHz is default value for xmega.
+#define configCPU_CLOCK_HZ          ( ( unsigned long ) F_CPU ) //2MHz is default value for xmega.
 //If you you want another frequency don't forget to modify period of timer counter used for tick interrupt
 #define configTICK_RATE_HZ          ( ( portTickType ) 1000 )
 #define configMAX_PRIORITIES        ( ( unsigned portBASE_TYPE ) 4 )//4

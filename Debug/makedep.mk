@@ -18,7 +18,11 @@ FreeRTOS\Source\timers.c
 
 main.c
 
+MyDrivers\port_driver.c
+
 MyDrivers\TC_driver.c
+
+MyDrivers\usart_driver_RTOS.c
 
 src\ASF\common\services\clock\xmega\sysclk.c
 

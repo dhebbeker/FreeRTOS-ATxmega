@@ -278,6 +278,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MyDrivers\port_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MyDrivers\port_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MyDrivers\TC_driver.c">
       <SubType>compile</SubType>
     </Compile>
@@ -285,6 +291,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MyDrivers\usart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MyDrivers\usart_driver_RTOS.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MyDrivers\usart_driver_RTOS.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="user_board.h">

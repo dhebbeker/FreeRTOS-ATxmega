@@ -72,7 +72,9 @@ C_SRCS +=  \
 ../FreeRTOS/Source/tasks.c \
 ../FreeRTOS/Source/timers.c \
 ../main.c \
+../MyDrivers/port_driver.c \
 ../MyDrivers/TC_driver.c \
+../MyDrivers/usart_driver_RTOS.c \
 ../src/ASF/common/services/clock/xmega/sysclk.c \
 ../src/ASF/common/services/ioport/xmega/ioport_compat.c \
 ../src/ASF/xmega/drivers/nvm/nvm.c
@@ -95,7 +97,9 @@ FreeRTOS/Source/queue.o \
 FreeRTOS/Source/tasks.o \
 FreeRTOS/Source/timers.o \
 main.o \
+MyDrivers/port_driver.o \
 MyDrivers/TC_driver.o \
+MyDrivers/usart_driver_RTOS.o \
 src/ASF/common/services/clock/xmega/sysclk.o \
 src/ASF/common/services/ioport/xmega/ioport_compat.o \
 src/ASF/xmega/drivers/nvm/nvm.o \
@@ -111,7 +115,9 @@ FreeRTOS/Source/queue.o \
 FreeRTOS/Source/tasks.o \
 FreeRTOS/Source/timers.o \
 main.o \
+MyDrivers/port_driver.o \
 MyDrivers/TC_driver.o \
+MyDrivers/usart_driver_RTOS.o \
 src/ASF/common/services/clock/xmega/sysclk.o \
 src/ASF/common/services/ioport/xmega/ioport_compat.o \
 src/ASF/xmega/drivers/nvm/nvm.o \
@@ -127,7 +133,9 @@ FreeRTOS/Source/queue.d \
 FreeRTOS/Source/tasks.d \
 FreeRTOS/Source/timers.d \
 main.d \
+MyDrivers/port_driver.d \
 MyDrivers/TC_driver.d \
+MyDrivers/usart_driver_RTOS.d \
 src/ASF/common/services/clock/xmega/sysclk.d \
 src/ASF/common/services/ioport/xmega/ioport_compat.d \
 src/ASF/xmega/drivers/nvm/nvm.d \
@@ -143,7 +151,9 @@ FreeRTOS/Source/queue.d \
 FreeRTOS/Source/tasks.d \
 FreeRTOS/Source/timers.d \
 main.d \
+MyDrivers/port_driver.d \
 MyDrivers/TC_driver.d \
+MyDrivers/usart_driver_RTOS.d \
 src/ASF/common/services/clock/xmega/sysclk.d \
 src/ASF/common/services/ioport/xmega/ioport_compat.d \
 src/ASF/xmega/drivers/nvm/nvm.d \
@@ -161,6 +171,10 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 
