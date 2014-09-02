@@ -8,6 +8,7 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include "sysclk.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -22,16 +23,7 @@
 #define	RED	IOPORT_CREATE_PIN(PORTA, 4)
 
 // define the usart port
-#define PC_USART	 USARTC0
-
-void EnableInter32MhzOsc() {
-	
-	CCP = CCP_IOREG_gc;// disable register security for oscillator update
-	OSC.CTRL = OSC_RC32MEN_bm; // enable 32MHz oscillator
-	while(!(OSC.STATUS & OSC_RC32MRDY_bm)); // wait for oscillator to be ready
-	CCP = CCP_IOREG_gc; //disable register security for clock update
-	CLK.CTRL = CLK_SCLKSEL_RC32M_gc; // switch to 32MHz clock
-}
+#define PC_USART	USARTC0
 
 void blink1(void *p) {
 	
@@ -69,13 +61,21 @@ void uartLoopBack(void *p) {
 
 int main(void)
 {	
-	
-	EnableInter32MhzOsc();
-	
+		
 	// prepare the i/o for LEDs
 	ioport_init();
 	ioport_set_pin_dir(RED, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(YELLOW, IOPORT_DIR_OUTPUT);
+	
+	// clock init & enable system clock to all peripheral modules
+	sysclk_init();
+	sysclk_enable_module(SYSCLK_PORT_GEN, 0xff);
+	sysclk_enable_module(SYSCLK_PORT_A, 0xff);
+	sysclk_enable_module(SYSCLK_PORT_B, 0xff);
+	sysclk_enable_module(SYSCLK_PORT_C, 0xff);
+	sysclk_enable_module(SYSCLK_PORT_D, 0xff);
+	sysclk_enable_module(SYSCLK_PORT_E, 0xff);
+	sysclk_enable_module(SYSCLK_PORT_F, 0xff);
 			
 	// start tasks
 	xTaskCreate(blink1, (signed char*) "blink1", 1024, NULL, 2, NULL);
