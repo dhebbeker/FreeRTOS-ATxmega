@@ -290,6 +290,18 @@
     <Compile Include="MyDrivers\TC_driver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MyDrivers\twi_master_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MyDrivers\twi_master_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MyDrivers\twi_slave_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MyDrivers\twi_slave_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MyDrivers\usart.h">
       <SubType>compile</SubType>
     </Compile>
@@ -297,6 +309,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MyDrivers\usart_driver_RTOS.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="twi_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="twi_task.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="user_board.h">

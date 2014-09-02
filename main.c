@@ -6,6 +6,7 @@
  */ 
 
 
+#include "user_board.h"
 #include <avr/io.h>
 #include <util/delay.h>
 #include "sysclk.h"
@@ -15,6 +16,8 @@
 #include "queue.h"
 #include "ioport.h"
 #include "usart_driver_RTOS.h"
+
+#include "twi_task.h"
 
 // YELLOW LED on PORTA-0
 #define	YELLOW	IOPORT_CREATE_PIN(PORTA, 0)
@@ -81,6 +84,7 @@ int main(void)
 	xTaskCreate(blink1, (signed char*) "blink1", 1024, NULL, 2, NULL);
 	xTaskCreate(blink2, (signed char*) "blink2", 1024, NULL, 2, NULL);
 	xTaskCreate(uartLoopBack, (signed char*) "uart1", 1024, NULL, 2, NULL);
+	xTaskCreate(twi_example, (signed char*) "twi", 1024, NULL, 2, NULL);
 	
 	vTaskStartScheduler();
 	
