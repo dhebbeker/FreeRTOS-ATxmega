@@ -69,6 +69,7 @@ int main(void)
 	ioport_init();
 	ioport_set_pin_dir(RED, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(YELLOW, IOPORT_DIR_OUTPUT);
+	board_init();
 	
 	// clock init & enable system clock to all peripheral modules
 	sysclk_init();
