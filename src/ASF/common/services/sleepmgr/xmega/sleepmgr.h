@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief Chip-specific reset cause functions
+ * \brief AVR XMEGA Sleep manager implementation
  *
  * Copyright (c) 2010-2012 Atmel Corporation. All rights reserved.
  *
@@ -40,66 +40,75 @@
  * \asf_license_stop
  *
  */
-#ifndef XMEGA_DRIVERS_CPU_RESET_CAUSE_H
-#define XMEGA_DRIVERS_CPU_RESET_CAUSE_H
+#ifndef XMEGA_SLEEPMGR_H
+#define XMEGA_SLEEPMGR_H
 
-#include "compiler.h"
-#include "ccp.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <compiler.h>
+#include <conf_sleepmgr.h>
+#include <sleep.h>
 
 /**
- * \ingroup reset_cause_group
- * \defgroup xmega_reset_cause_group XMEGA reset cause
- *
- * See \ref reset_cause_quickstart
- *
+ * \weakgroup sleepmgr_group
  * @{
  */
 
+enum sleepmgr_mode {
+	//! Active mode.
+	SLEEPMGR_ACTIVE = 0,
+	//! Idle mode.
+	SLEEPMGR_IDLE,
+	//! Extended Standby mode.
+	SLEEPMGR_ESTDBY,
+	//! Power Save mode.
+	SLEEPMGR_PSAVE,
+	//! Standby mode.
+	SLEEPMGR_STDBY,
+	//! Power Down mode.
+	SLEEPMGR_PDOWN,
+	SLEEPMGR_NR_OF_MODES,
+};
+
 /**
- * \brief Chip-specific reset cause type capable of holding all chip reset
- * causes. Typically reflects the size of the reset cause register.
+ * \internal
+ * \name Internal arrays
+ * @{
  */
-typedef uint8_t         reset_cause_t;
+#if defined(CONFIG_SLEEPMGR_ENABLE) || defined(__DOXYGEN__)
+//! Sleep mode lock counters
+extern uint8_t sleepmgr_locks[];
+/**
+ * \brief Look-up table with sleep mode configurations
+ * \note This is located in program memory (Flash) as it is constant.
+ */
+extern enum SLEEP_SMODE_enum sleepmgr_configs[];
+#endif /* CONFIG_SLEEPMGR_ENABLE */
+//! @}
 
-//! \internal \name Chip-specific reset causes
-//@{
-//! \internal External reset cause
-#define CHIP_RESET_CAUSE_EXTRST         RST_EXTRF_bm
-//! \internal brown-out detected reset cause, same as for CPU
-#define CHIP_RESET_CAUSE_BOD_IO         RST_BORF_bm
-//! \internal Brown-out detected reset cause, same as for I/O
-#define CHIP_RESET_CAUSE_BOD_CPU        RST_BORF_bm
-//! \internal On-chip debug system reset cause
-#define CHIP_RESET_CAUSE_OCD            RST_PDIRF_bm
-//! \internal Power-on-reset reset cause
-#define CHIP_RESET_CAUSE_POR            RST_PORF_bm
-//! \internal Software reset reset cause
-#define CHIP_RESET_CAUSE_SOFT           RST_SRF_bm
-//! \internal Spike detected reset cause
-#define CHIP_RESET_CAUSE_SPIKE          RST_SDRF_bm
-//! \internal Watchdog timeout reset cause
-#define CHIP_RESET_CAUSE_WDT            RST_WDRF_bm
-//@}
-
-static inline reset_cause_t reset_cause_get_causes(void)
+static inline void sleepmgr_sleep(const enum sleepmgr_mode sleep_mode)
 {
-	return (reset_cause_t)RST.STATUS;
-}
+	Assert(sleep_mode != SLEEPMGR_ACTIVE);
+#ifdef CONFIG_SLEEPMGR_ENABLE
+	sleep_set_mode(sleepmgr_configs[sleep_mode-1]);
+	sleep_enable();
 
-static inline void reset_cause_clear_causes(reset_cause_t causes)
-{
-	RST.STATUS = causes;
-}
+	cpu_irq_enable();
+	sleep_enter();
 
-static inline void reset_do_soft_reset(void)
-{
-	ccp_write_io((void *)&RST.CTRL, RST_SWRST_bm);
+	sleep_disable();
+#else
+	cpu_irq_enable();
+#endif /* CONFIG_SLEEPMGR_ENABLE */
 
-	while (1) {
-		/* Intentionally empty. */
-	}
 }
 
 //! @}
 
-#endif /* XMEGA_DRIVERS_CPU_RESET_CAUSE_H */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* XMEGA_SLEEPMGR_H */

@@ -1,9 +1,9 @@
 /**
  * \file
  *
- * \brief Preprocessor stringizing utils.
+ * \brief Chip-specific sleep manager configuration
  *
- * Copyright (c) 2009 Atmel Corporation. All rights reserved.
+ * Copyright (c) 2010 Atmel Corporation. All rights reserved.
  *
  * \asf_license_start
  *
@@ -40,42 +40,10 @@
  * \asf_license_stop
  *
  */
-#ifndef _STRINGZ_H_
-#define _STRINGZ_H_
+#ifndef CONF_SLEEPMGR_H
+#define CONF_SLEEPMGR_H
 
-/**
- * \defgroup group_xmega_utils_stringz Stringize
- *
- * \ingroup group_xmega_utils
- *
- * \{
- */
+// Sleep manager options
+#define CONFIG_SLEEPMGR_ENABLE
 
-/*! \brief Stringize.
- *
- * Stringize a preprocessing token, this token being allowed to be \#defined.
- *
- * May be used only within macros with the token passed as an argument if the token is \#defined.
- *
- * For example, writing STRINGZ(PIN) within a macro \#defined by PIN_NAME(PIN)
- * and invoked as PIN_NAME(PIN0) with PIN0 \#defined as A0 is equivalent to
- * writing "A0".
- */
-#define STRINGZ(x)                                #x
-
-/*! \brief Absolute stringize.
- *
- * Stringize a preprocessing token, this token being allowed to be \#defined.
- *
- * No restriction of use if the token is \#defined.
- *
- * For example, writing ASTRINGZ(PIN0) anywhere with PIN0 \#defined as A0 is
- * equivalent to writing "A0".
- */
-#define ASTRINGZ(x)                               STRINGZ(x)
-
-/**
- * \}
- */
-
-#endif  // _STRINGZ_H_
+#endif /* CONF_SLEEPMGR_H */
