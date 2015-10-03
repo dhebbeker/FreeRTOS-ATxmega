@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "main", "main.cproj", "{F1F5ACCA-D17E-49F2-AF4A-CE677484BB94}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avionics_firmware", "avionics_firmware.cproj", "{F1F5ACCA-D17E-49F2-AF4A-CE677484BB94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

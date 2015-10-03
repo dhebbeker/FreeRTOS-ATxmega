@@ -4,6 +4,7 @@
  *      Universitaet Erlangen-Nuernberg
  *      LS Informationstechnik (Kommunikationselektronik)
  *      Support email: Yuriy.Kulikov.87@googlemail.com
+ * Copyright (C) 2015 Nigil Lee
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +26,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#include "TC_driver.h"
-#include "pmic_driver.h"
+#include "asf.h"
 
 /*-----------------------------------------------------------
  * Implementation of functions defined in portable.h for the AVR XMEGA port.
@@ -155,7 +155,7 @@ extern volatile tskTCB * volatile pxCurrentTCB;
 /*-----------------------------------------------------------*/
 
 /*
- * Perform hardware setup to enable ticks from timer 1, compare match A.
+ * Perform hardware setup to enable ticks from timer 0
  */
 static void prvSetupTimerInterrupt(void);
 /*-----------------------------------------------------------*/
@@ -333,18 +333,23 @@ void vPortYield(void) {
 /*
  * Setup timer 1 compare match A to generate a tick interrupt.
  */
+
 static void prvSetupTimerInterrupt(void) {
-    //Use TCC0 as a tick counter. If this is to be changed, change ISR as well
-    TC0_t * tickTimer = &TCC0;
-    //select the clock source and pre-scale by 64
-    TC0_ConfigClockSource(tickTimer, TC_CLKSEL_DIV64_gc);
+    // Use TCC0 as a tick counter. If this is to be changed, change ISR as well
+    tc_enable(&TCC0);
+    tc_set_wgm(&TCC0, TC_WG_NORMAL);
+
+    // Select the clock source and prescale by 64
+    tc_write_clock_source(&TCC0, TC_CLKSEL_DIV64_gc);
+
     //set period of counter
-    tickTimer->PER = configCPU_CLOCK_HZ / configTICK_RATE_HZ / 64 - 1;
+    tc_write_period(&TCC0, configCPU_CLOCK_HZ / configTICK_RATE_HZ / 64 - 1);
 
     //enable interrupt and set low level
-    TC0_SetOverflowIntLevel(tickTimer, TC_OVFINTLVL_LO_gc);
-    //enable low level interrupts
-    PMIC_EnableLowLevel();
+    //tc_set_overflow_interrupt_callback(&TCC0, tickTimer);
+    tc_set_overflow_interrupt_level(&TCC0, TC_INT_LVL_LO);
+
+    cpu_irq_enable();
 }
 /*-----------------------------------------------------------*/
 
@@ -377,6 +382,7 @@ ISR (TCC0_OVF_vect, ISR_NAKED) {
  * tick count.  We don't need to switch context, this can only be done by
  * manual calls to taskYIELD();
  */
+
 ISR (TCC0_OVF_vect, ISR_NAKED)
 {
     vTaskIncrementTick();
