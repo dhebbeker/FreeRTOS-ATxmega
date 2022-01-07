@@ -5,14 +5,14 @@
 #include "task.h"
 #include "queue.h"
 
-void blink1(void *p) {	
+static void blink1(void *p) {	
 	while (1) {
         PORTA.OUT ^= 0x01;
         vTaskDelay(1000);
 	}
 }
 
-void blink2(void *p) {
+static void blink2(void *p) {
 	while (1) {
 		PORTA.OUT ^= 0x02;
 		vTaskDelay(100);
