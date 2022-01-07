@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectVersion>6.2</ProjectVersion>
+    <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
     <ProjectGuid>{f1f5acca-d17e-49f2-af4a-ce677484bb94}</ProjectGuid>
     <avrdevice>ATxmega256A3BU</avrdevice>
@@ -89,7 +89,7 @@
   <documentation help="http://asf.atmel.com/docs/3.19.0/common.applications.user_application.user_board.xmegaau/html/index.html" />
   <offline-documentation help="" />
   <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.19.0" />
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.42.0" />
   </dependencies>
   <project id="common.applications.user_application.user_board.xmegaau" value="Add" config="" content-id="Atmel.ASF" />
   <board id="board.user_board.xmegaau" value="Add" config="" content-id="Atmel.ASF" />
@@ -119,10 +119,13 @@
       <ToolNumber>J41800026976</ToolNumber>
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
+    <ResetRule>0</ResetRule>
+    <EraseKey />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGcc>
+  <avrgcc.common.Device>-mmcu=atxmega256a3bu -B "%24(PackRepoDir)\atmel\XMEGAA_DFP\1.2.141\gcc\dev\atxmega256a3bu"</avrgcc.common.Device>
   <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
@@ -154,6 +157,7 @@
       <Value>../src/ASF/common/services/sleepmgr</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>../src/ASF/xmega/drivers/tc</Value>
+      <Value>%24(PackRepoDir)\atmel\XMEGAA_DFP\1.2.141\include\</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -188,6 +192,7 @@
       <Value>../src/ASF/common/services/sleepmgr</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>../src/ASF/xmega/drivers/tc</Value>
+      <Value>%24(PackRepoDir)\atmel\XMEGAA_DFP\1.2.141\include\</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
 </AvrGcc>
@@ -196,6 +201,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
+  <avrgcc.common.Device>-mmcu=atxmega256a3bu -B "%24(PackRepoDir)\atmel\XMEGAA_DFP\1.2.141\gcc\dev\atxmega256a3bu"</avrgcc.common.Device>
   <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
@@ -234,6 +240,7 @@
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>../src/drivers</Value>
       <Value>../src/ASF/xmega/drivers/tc</Value>
+      <Value>%24(PackRepoDir)\atmel\XMEGAA_DFP\1.2.141\include\</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -269,6 +276,7 @@
       <Value>../src/ASF/common/services/sleepmgr</Value>
       <Value>../src/ASF/common/services/ioport</Value>
       <Value>../src/ASF/xmega/drivers/tc</Value>
+      <Value>%24(PackRepoDir)\atmel\XMEGAA_DFP\1.2.141\include\</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
   <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>

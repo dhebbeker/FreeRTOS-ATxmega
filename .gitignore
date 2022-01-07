@@ -65,3 +65,4 @@ Debug/
 *.msm
 *.msp
 *.atsuo
+/freertos.componentinfo.xml
