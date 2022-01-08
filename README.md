@@ -11,4 +11,4 @@ and code from Atmel Studio's Framework (ASF)
 It was tested on ATxmega256A3BU.
 
 The demo runs
-- two LED blinkink tasks with differend period
+- two LED blinking tasks with different period
